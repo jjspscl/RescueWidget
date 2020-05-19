@@ -34,6 +34,7 @@ class MainWidget(Gtk.Window):
         self.set_app_paintable(True)
         self.set_resizable(False)
         self.set_decorated(False)
+        self.set_keep_above(True)
         self.set_titlebar()
         self.screen = self.get_screen()
         self.visual = self.screen.get_rgba_visual()
