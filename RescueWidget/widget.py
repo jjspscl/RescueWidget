@@ -4,6 +4,7 @@ import math
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
+
 class TrayIcon(Gtk.StatusIcon):
     def __init__(self):
         Gtk.StatusIcon.__init__(self)
@@ -15,8 +16,9 @@ class TrayIcon(Gtk.StatusIcon):
     def on_secondary_click(self, widget, button, time):
         menu = Gtk.Menu()
 
-        menu_item1 = Gtk.MenuItem("Settings... ")
+        menu_item1 = Gtk.MenuItem("Settings")
         menu.append(menu_item1)
+
 
         menu_item2 = Gtk.MenuItem("Quit")
         menu.append(menu_item2)
@@ -51,11 +53,12 @@ class MainWidget(Gtk.Window):
         height = self.get_allocated_height()
         cr = widget.get_property('window').cairo_create()
         cr.set_source_rgb(0.6, 0.6, 0.6)
-        cr.translate(width/2, height/2)
-        cr.arc(0, 
-            0,50,
-            0, 2*math.pi)
+        cr.translate(width / 2, height / 2)
+        cr.arc(0,
+               0, 50,
+               0, 2 * math.pi)
         cr.fill()
+
 
 if __name__ == '__main__':
     tray = TrayIcon()
