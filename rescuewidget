@@ -5,7 +5,6 @@ def main():
     # argp = ArgumentParser(description=APP_DESC)
     #options = Options()
     tray = widget.TrayIcon()
-    widget.MainWidget()
     widget.Gtk.main()
 	
 if __name__ == "__main__":

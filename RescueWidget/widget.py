@@ -3,22 +3,26 @@ import math
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
-
-
+from RescueWidget.settings import SettingsWidget
 class TrayIcon(Gtk.StatusIcon):
     def __init__(self):
         Gtk.StatusIcon.__init__(self)
-        self.set_from_icon_name('rescue-widget')
+        self.set_from_icon_name('rescue-witdget')
         self.set_has_tooltip(True)
         self.set_visible(True)
         self.connect("popup_menu", self.on_secondary_click)
+
+    def launch_settings(self, arg):
+        self.settings_widget = SettingsWidget()
+        self.main_widget.hide()
+        print("settings")
 
     def on_secondary_click(self, widget, button, time):
         menu = Gtk.Menu()
 
         menu_item1 = Gtk.MenuItem("Settings")
         menu.append(menu_item1)
-
+        menu_item1.connect("activate", self.launch_settings)
 
         menu_item2 = Gtk.MenuItem("Quit")
         menu.append(menu_item2)
@@ -32,6 +36,7 @@ class MainWidget(Gtk.Window):
 
     def __init__(self):
         super(MainWidget, self).__init__()
+        print("Main")
         self.set_position(Gtk.WindowPosition.CENTER)
         self.set_app_paintable(True)
         self.set_resizable(False)
@@ -48,6 +53,9 @@ class MainWidget(Gtk.Window):
         self.add(darea)
         self.show_all()
 
+    def hide(self):
+        self.hide()
+
     def expose(self, widget, event):
         width = self.get_allocated_width()
         height = self.get_allocated_height()
@@ -59,8 +67,3 @@ class MainWidget(Gtk.Window):
                0, 2 * math.pi)
         cr.fill()
 
-
-if __name__ == '__main__':
-    tray = TrayIcon()
-    MainWidget()
-    Gtk.main()
