@@ -11,11 +11,11 @@ class TrayIcon(Gtk.StatusIcon):
         self.set_has_tooltip(True)
         self.set_visible(True)
         self.connect("popup_menu", self.on_secondary_click)
+        self.main_widget = MainWidget()
 
     def launch_settings(self, arg):
         self.settings_widget = SettingsWidget()
         self.main_widget.hide()
-        print("settings")
 
     def on_secondary_click(self, widget, button, time):
         menu = Gtk.Menu()
@@ -47,14 +47,12 @@ class MainWidget(Gtk.Window):
         self.visual = self.screen.get_rgba_visual()
         self.set_visual(self.visual)
         self.connect("destroy", Gtk.main_quit)
-        self.set_default_size(400, 300)
+        self.set_default_size(100, 100)
         darea = Gtk.DrawingArea()
         darea.connect("draw", self.expose)
         self.add(darea)
         self.show_all()
 
-    def hide(self):
-        self.hide()
 
     def expose(self, widget, event):
         width = self.get_allocated_width()
